@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Recommender</title>
+  <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #0f2027;
+          background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+          color: white;
+          text-align: center;
+          padding: 40px;
+        }
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 20px;
+        }
+        form {
+          margin: 20px auto;
+          padding: 20px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 12px;
+          width: 400px;
+        }
+        input[type="text"] {
+          padding: 10px;
+          width: 80%;
+          border: none;
+          border-radius: 8px;
+          margin-bottom: 15px;
+        }
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 8px;
+          background: #ff9800;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        button:hover {
+          background: #e68900;
+        }
+        .results {
+          margin-top: 30px;
+        }
+        .movie-card {
+          background: rgba(255,255,255,0.1);
+          padding: 15px;
+          border-radius: 10px;
+          margin: 10px auto;
+          width: 250px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+      </style>
+    </head>
+    <body>
+      <h1>🎬 Movie Recommender</h1>
+
+      <h2>Search for a Movie</h2>
+      <form method="POST">
+        <input type="text" name="movie" placeholder="Enter a genre (e.g. Drama, Action)" required>
+        <br>
+        <button type="submit">Recommend</button>
+      </form>
+
+      <div class="results">
+        {% if recommendations %}
+          <h2>Recommended Movies:</h2>
+          {% for movie in recommendations %}
+            <div class="movie-card">{{ movie }}</div>
+          {% endfor %}
+        {% elif genre_recommendations %}
+          <br>
+         {% elif revenue %}
+          <br>
+        {% elif request.method == "POST" %}
+          <h2>No movies found 😢</h2>
+        {% endif %}
+      </div>
+
+
+
+
+
+      <h2>Search By Genre</h2>
+      <form method="POST">
+        <input type="text" name="genre" placeholder="Enter a genre (e.g. Drama, Action)" required>
+        <br>
+        <button type="submit">Recommend</button>
+      </form>
+
+      <div class="results">
+        {% if genre_recommendations %}
+          <h2>Recommended Movies:</h2>
+          {% for movie in genre_recommendations %}
+            <div class="movie-card">{{ movie }}</div>
+          {% endfor %}
+        {% elif recommendations %}
+          <br>
+          {% elif revenue %}
+          <br>
+        {% elif request.method == "POST" %}
+          <h2>No movies found for that genre 😢</h2>
+        {% endif %}
+      </div>
+
+
+    <h2>Estimate an Movie's Revenue</h2>
+      <form method="POST">
+        <input type="text" name="budget" placeholder="Enter the movie's budget" required>
+
+          <input type="text" name="score" placeholder="Enter the movie's score">
+          <input type="text" name="year" placeholder="Enter the Release Year" required>
+        <br>
+        <button type="submit">Estimate</button>
+      </form>
+
+      <div class="results">
+        {% if revenue %}
+          <h2>Estimated Revenue</h2>
+            <div class="movie-card">{{ revenue }}</div>
+        {% elif genre_recommendations %}
+          <br>
+        {% elif recommendations %}
+          <br>
+        {% elif request.method == "POST" %}
+          <h2>Cannot be estimated😢</h2>
+        {% endif %}
+      </div>
+</body>
+</html>
