@@ -3,6 +3,9 @@ Welcome to the Movie Recommendation System! This project uses data science and m
 Below is an overview of the complete workflow, including Exploratory Data Analysis (EDA), data preprocessing, feature engineering for recommendations, 
 and regression modeling for revenue prediction.
 
+Live Link :- https://movie-recommendation-b2jl.onrender.com 
+Note :- The web is hosted on renders free tier , so it might take 1-2 minutes to wake up.
+
 📚 **Dataset**.
 The dataset comprises more than 10,000 movies, with fields like:
 
